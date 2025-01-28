@@ -75,9 +75,8 @@ public class Sistema {
 
     public Usuario getRandomUser() {
         if (usuarios.isEmpty() || usuarios.size() == 1 && usuarios.contains(usuarioLogado)) {
-            return null; // Não há usuários disponíveis ou apenas o usuário logado está na lista
+            return null;
         }
-
         while (indiceAtual < usuarios.size()) {
             Usuario proximoUsuario = usuarios.get(indiceAtual);
             indiceAtual++;
@@ -85,10 +84,8 @@ public class Sistema {
                 return proximoUsuario;
             }
         }
-
-        // Todos os usuários foram exibidos, reinicia a lista
         indiceAtual = 1;
-        return usuarios.get(0); // Todos os usuários disponíveis já foram percorridos
+        return usuarios.get(0);
     }
 
 

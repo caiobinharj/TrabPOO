@@ -18,17 +18,29 @@ public class TelaUsuario extends JFrame {
         JButton procurarMatchButton = new JButton("Procurar Match");
         JButton editarPerfilButton = new JButton("Editar Perfil");
         JButton conversasButton = new JButton("Conversas");
+        JButton matchesButton = new JButton("Matches");
         JButton logoutButton = new JButton("Logout");
 
         mainPanel.add(procurarMatchButton);
         mainPanel.add(editarPerfilButton);
         mainPanel.add(conversasButton);
+        mainPanel.add(matchesButton);
         mainPanel.add(logoutButton);
 
         procurarMatchButton.addActionListener(e -> {
             new TelaProcurarMatch(sistema).setVisible(true);
             dispose();
         });
+
+        matchesButton.addActionListener(e -> {
+            new TelaMatches(sistema).setVisible(true);
+            dispose();
+        });
+
+        //conversasButton.addActionListener(e -> {
+         //   new TelaConversa(sistema, ).setVisible(true);
+        //    dispose();
+        //});
 
         logoutButton.addActionListener(e -> {
             sistema.logout();

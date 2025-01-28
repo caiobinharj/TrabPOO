@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Sistema {
     private ArrayList<Usuario> usuarios;
     private Usuario usuarioLogado;
+    private int indiceAtual = 1;
 
     public Sistema() {
         usuarios = new ArrayList<>();
@@ -73,15 +74,24 @@ public class Sistema {
     }
 
     public Usuario getRandomUser() {
-        if (usuarios.size() > 1) {
-            Usuario random;
-            do {
-                random = usuarios.get((int)(Math.random() * usuarios.size()));
-            } while (random == usuarioLogado);
-            return random;
+        if (usuarios.isEmpty() || usuarios.size() == 1 && usuarios.contains(usuarioLogado)) {
+            return null; // Não há usuários disponíveis ou apenas o usuário logado está na lista
         }
-        return null;
+
+        while (indiceAtual < usuarios.size()) {
+            Usuario proximoUsuario = usuarios.get(indiceAtual);
+            indiceAtual++;
+            if (!proximoUsuario.equals(usuarioLogado)) {
+                return proximoUsuario;
+            }
+        }
+
+        // Todos os usuários foram exibidos, reinicia a lista
+        indiceAtual = 1;
+        return usuarios.get(0); // Todos os usuários disponíveis já foram percorridos
     }
+
+
 
     public void salvarConversa(String remetente, String destinatario, String mensagem) {
         try {

@@ -12,37 +12,56 @@ public class Sistema {
     }
 
     private void carregarUsuarios() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
+        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
+                if (linha.trim().isEmpty()) continue;
+
                 String[] dados = linha.split(";");
-                Usuario u = new Usuario();
-                // Preencher dados do usuário
-                usuarios.add(u);
+                if (dados.length >= 17) {
+                    Usuario u = new Usuario();
+                    u.setLogin(dados[0]);
+                    u.setNome(dados[1]);
+                    u.setIdade(Integer.parseInt(dados[2]));
+                    u.setSexo(dados[3].charAt(0));
+                    u.setCidade(dados[4]);
+                    u.setPrefMusical(dados[5]);
+                    u.setBebe(Boolean.parseBoolean(dados[6]));
+                    u.setFuma(Boolean.parseBoolean(dados[7]));
+                    u.setOrientacaoSexual(dados[8]);
+                    u.setFoto(dados[9]);
+                    u.setHobbies(dados[10]);
+                    u.setTrabalha(Boolean.parseBoolean(dados[11]));
+                    u.setFaculdade(Boolean.parseBoolean(dados[12]));
+                    u.setPeriodo(dados[13].charAt(0));
+                    u.setExercita(Boolean.parseBoolean(dados[14]));
+                    u.setDescricao(dados[15]);
+                    u.setDenuncias(Integer.parseInt(dados[16]));
+
+                    usuarios.add(u);
+                }
             }
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public boolean login(String login, String senha) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("login.txt"));
+        try (BufferedReader br = new BufferedReader(new FileReader("login.txt"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
+                if (linha.trim().isEmpty()) continue;
+
                 String[] dados = linha.split(";");
-                if (dados[0].equals(login) && dados[1].equals(senha)) {
+                if (dados.length >= 2 && dados[0].equals(login) && dados[1].equals(senha)) {
                     for (Usuario u : usuarios) {
-                        if (u.getLogin().equals(login)) {
+                        if (u != null && u.getLogin() != null && u.getLogin().equals(login)) {
                             usuarioLogado = u;
                             return true;
                         }
                     }
                 }
             }
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

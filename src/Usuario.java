@@ -21,13 +21,18 @@ public class Usuario {
     private boolean exercita;
     private String descricao;
     private int denuncias;
+    private boolean moderador;
 
     public Usuario() {
         this.denuncias = 0;
     }
 
-    public boolean isBebe() {
-        return bebe;
+    public void setModerador(boolean moderador) {
+        this.moderador = moderador;
+    }
+
+    public boolean isModerador() {
+        return this.moderador;
     }
 
     public void setBebe(boolean bebe) {
@@ -90,10 +95,6 @@ public class Usuario {
         this.prefMusical = prefMusical;
     }
 
-    public boolean isFuma() {
-        return fuma;
-    }
-
     public void setFuma(boolean fuma) {
         this.fuma = fuma;
     }
@@ -122,16 +123,8 @@ public class Usuario {
         this.hobbies = hobbies;
     }
 
-    public boolean isTrabalha() {
-        return trabalha;
-    }
-
     public void setTrabalha(boolean trabalha) {
         this.trabalha = trabalha;
-    }
-
-    public boolean isFaculdade() {
-        return faculdade;
     }
 
     public void setFaculdade(boolean faculdade) {
@@ -144,10 +137,6 @@ public class Usuario {
 
     public void setPeriodo(char periodo) {
         this.periodo = periodo;
-    }
-
-    public boolean isExercita() {
-        return exercita;
     }
 
     public void setExercita(boolean exercita) {

@@ -9,6 +9,7 @@ public class TelaProcurarMatch extends JFrame {
 
     public TelaProcurarMatch(Sistema sistema) {
         this.sistema = sistema;
+        this.usuarioLogado = sistema.getUsuarioLogado();
         initComponents();
     }
 
@@ -93,7 +94,10 @@ public class TelaProcurarMatch extends JFrame {
         };
 
 
-        dislikeButton.addActionListener(proximoUsuario);
+        dislikeButton.addActionListener(e -> {
+            sistema.darDislike(usuarioAtual);
+            proximoUsuario.actionPerformed(null);
+        });
 
         likeButton.addActionListener(e -> {
             sistema.darLike(usuarioAtual);
@@ -103,6 +107,7 @@ public class TelaProcurarMatch extends JFrame {
         denunciarButton.addActionListener(e -> {
             sistema.denunciar(usuarioAtual);
             new TelaDenunciar(sistema, usuarioLogado, usuarioAtual).setVisible(true);
+            //new TelaDenuncias(sistema).setVisible(true);
             proximoUsuario.actionPerformed(null);
         });
 

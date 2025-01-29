@@ -25,18 +25,24 @@ public class TelaMatches extends JFrame {
             mainPanel.add(new JLabel("Você ainda não tem matches"));
         } else {
             for (Usuario match : matches) {
-                JPanel matchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                JPanel matchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
                 matchPanel.setBorder(BorderFactory.createEtchedBorder());
 
                 JLabel nomeLabel = new JLabel(match.getNome());
+                JButton perfilButton = new JButton("Perfil");
                 JButton conversarButton = new JButton("Conversar");
 
                 conversarButton.addActionListener(e -> {
                     new TelaConversa(sistema, match).setVisible(true);
                 });
 
+                perfilButton.addActionListener(e -> {
+                    new TelaPerfil(sistema, match).setVisible(true);
+                });
+
                 matchPanel.add(nomeLabel);
                 matchPanel.add(conversarButton);
+                matchPanel.add(perfilButton);
                 mainPanel.add(matchPanel);
             }
         }

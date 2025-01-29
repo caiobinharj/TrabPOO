@@ -104,5 +104,7 @@ public class TelaRegistro extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+
+        //Comentário
     }
 }

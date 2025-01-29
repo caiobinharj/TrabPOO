@@ -7,10 +7,82 @@ public class Sistema {
     private Usuario usuarioLogado;
     private int indiceAtual = 0;
     private static final String ARQUIVO_LIKES = "likes.txt";
+    private static final String ARQUIVO_DISLIKES = "dislikes.txt";
+    private List<Denuncia> denuncias;
+    private List<Usuario> usuariosBloqueados;
+    private static final String ARQUIVO_DENUNCIAS = "denuncias.txt";
 
     public Sistema() {
-        usuarios = new ArrayList<>();
+        this.usuarios = new ArrayList<>();
+        this.denuncias = new ArrayList<>();
+        this.usuariosBloqueados = new ArrayList<>();
         carregarUsuarios();
+    }
+
+    public Usuario buscarUsuarioPorLogin(String login) {
+        List<Usuario> usuarios = listarUsuarios(); // Obtém todos os usuários do sistema
+
+        for (Usuario u : usuarios) {
+            if (u.getLogin().equals(login)) {
+                return u; // Retorna o usuário encontrado
+            }
+        }
+        return null;
+    }
+
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+        String arquivo = "usuarios.txt";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+
+                String login = dados[0];
+                String nome = dados[1];
+                int idade = Integer.parseInt(dados[2]);
+                char sexo = dados[3].isEmpty() ? ' ' : dados[3].charAt(0);
+                String cidade = dados[4];
+                String prefMusical = dados[5];
+                boolean bebe = Boolean.parseBoolean(dados[6]);
+                boolean fuma = Boolean.parseBoolean(dados[7]);
+                String orientacaoSexual = dados[8].equals("null") ? null : dados[8];
+                String foto = dados[9].equals("null") ? null : dados[9];
+                String hobbies = dados[10];
+                boolean trabalha = Boolean.parseBoolean(dados[11]);
+                boolean faculdade = Boolean.parseBoolean(dados[12]);
+                char periodo = dados[13].isEmpty() ? ' ' : dados[13].charAt(0);
+                boolean exercita = Boolean.parseBoolean(dados[14]);
+                String descricao = dados[15];
+                int denuncias = Integer.parseInt(dados[16]);
+
+                Usuario usuario = new Usuario();
+                usuario.setLogin(login);
+                usuario.setNome(nome);
+                usuario.setIdade(idade);
+                usuario.setSexo(sexo);
+                usuario.setCidade(cidade);
+                usuario.setPrefMusical(prefMusical);
+                usuario.setBebe(bebe);
+                usuario.setFuma(fuma);
+                usuario.setOrientacaoSexual(orientacaoSexual);
+                usuario.setFoto(foto);
+                usuario.setHobbies(hobbies);
+                usuario.setTrabalha(trabalha);
+                usuario.setFaculdade(faculdade);
+                usuario.setPeriodo(periodo);
+                usuario.setExercita(exercita);
+                usuario.setDescricao(descricao);
+                usuario.setDenuncias(denuncias);
+
+                usuarios.add(usuario);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
     }
 
     private void carregarUsuarios() {
@@ -99,14 +171,26 @@ public class Sistema {
 
     private Set<String> carregarInteracoes() {
         Set<String> interacoes = new HashSet<>();
+        String[] arquivos = {ARQUIVO_LIKES, ARQUIVO_DISLIKES, ARQUIVO_DENUNCIAS};
 
-        try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO_LIKES))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                interacoes.add(linha.trim());
+        for (String arquivo : arquivos) {
+            try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+                String linha;
+                while ((linha = br.readLine()) != null) {
+                    linha = linha.trim();
+
+                    if (arquivo.equals(ARQUIVO_DENUNCIAS)) {
+                        String[] partes = linha.split(";", 3);
+                        if (partes.length >= 2) {
+                            interacoes.add(partes[0] + ";" + partes[1]);
+                        }
+                    } else {
+                        interacoes.add(linha);
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao ler o arquivo: " + arquivo + " - " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.err.println("Erro ao ler o arquivo de interações: " + e.getMessage());
         }
 
         return interacoes;
@@ -137,6 +221,17 @@ public class Sistema {
         }
     }
 
+    public void darDislike(Usuario usuario) {
+        try {
+            FileWriter fw = new FileWriter("dislikes.txt", true);
+            fw.write(usuarioLogado.getLogin() + ";" + usuario.getLogin() + "\n");
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private boolean verificarMatch(Usuario usuario) {
         try {
             BufferedReader br = new BufferedReader(new FileReader("likes.txt"));
@@ -161,6 +256,54 @@ public class Sistema {
         atualizarUsuario(usuario);
     }
 
+    public List<Denuncia> getDenuncias() {
+        return denuncias;
+    }
+
+    public void registrarDenuncia(String denunciante, String denunciado, String motivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_DENUNCIAS, true))) {
+            writer.write(denunciante + ";" + denunciado + ";" + motivo);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Denuncia> carregarDenuncias() {
+        List<Denuncia> listaDenuncias = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO_DENUNCIAS))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(";");
+                if (dados.length == 3) {
+                    Usuario denunciante = buscarUsuarioPorLogin(dados[0]);
+                    Usuario denunciado = buscarUsuarioPorLogin(dados[1]);
+                    if (denunciante != null && denunciado != null) {
+                        listaDenuncias.add(new Denuncia(denunciante, denunciado, dados[2]));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listaDenuncias;
+    }
+
+    public void removerDenuncia(Denuncia denunciaRemover) {
+        List<Denuncia> denuncias = carregarDenuncias();
+        denuncias.removeIf(d -> d.getDenunciante().equals(denunciaRemover.getDenunciante()) &&
+                d.getUsuarioDenunciado().equals(denunciaRemover.getUsuarioDenunciado()) &&
+                d.getMotivo().equals(denunciaRemover.getMotivo()));
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_DENUNCIAS))) {
+            for (Denuncia d : denuncias) {
+                writer.write(d.getDenunciante() + ";" + d.getUsuarioDenunciado() + ";" + d.getMotivo());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void atualizarUsuario(Usuario usuario) {
         // Implementar atualização no arquivo
         ArrayList<String> linhas = new ArrayList<>();

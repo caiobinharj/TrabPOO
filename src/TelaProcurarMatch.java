@@ -47,16 +47,16 @@ public class TelaProcurarMatch extends JFrame {
         // Ações dos botões
         ActionListener proximoUsuario = e -> {
             usuarioAtual = sistema.getRandomUser();
-            if (!(usuarioAtual.getNome().equals("Não há mais usuários disponíveis"))) {
+            if (usuarioAtual != null) {
                 nomeLabel.setText(usuarioAtual.getNome());
                 idadeLabel.setText(String.valueOf(usuarioAtual.getIdade()));
                 descricaoArea.setText(usuarioAtual.getDescricao());
                 // Atualizar foto
             } else {
-                nomeLabel.setText(usuarioAtual.getNome());
-                idadeLabel.setText(String.valueOf(usuarioAtual.getIdade()));
-                descricaoArea.setText(usuarioAtual.getDescricao());
-                JOptionPane.showMessageDialog(null, "Não há mais usuários disponíveis!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                nomeLabel.setText("Nenhum usuário disponível");
+                idadeLabel.setText("");
+                descricaoArea.setText("Todos os perfis disponíveis já receberam interação.");
+                JOptionPane.showMessageDialog(this, "Não há mais usuários disponíveis!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         };
 

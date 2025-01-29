@@ -1,0 +1,17 @@
+
+A;B
+A;D
+B;A
+B;E
+A;E
+A;F
+B;C
+B;D
+B;F
+C;D
+C;F
+D;A
+D;B
+D;C
+D;E
+D;F

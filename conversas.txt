@@ -1,0 +1,4 @@
+
+A;B;oi
+B;A;ola
+A;B;TUDO BEM?

@@ -17,14 +17,13 @@ public class TelaRegistro extends JFrame {
         setTitle("Registro de Novo Usuário");
 
         JPanel mainPanel = new JPanel(new GridLayout(0, 2, 5, 5));
-        mainPanel.setBackground(new Color(200, 0, 0)); // Fundo vermelho vibrante
+        mainPanel.setBackground(new Color(200, 0, 0));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Fonte e cores
+
         Font labelFont = new Font("Arial", Font.BOLD, 14);
         Color textColor = Color.WHITE;
 
-        // Campos de registro
         JTextField loginField = createStyledTextField();
         JPasswordField senhaField = new JPasswordField(20);
         senhaField.setFont(labelFont);
@@ -48,14 +47,13 @@ public class TelaRegistro extends JFrame {
         descricaoArea.setLineWrap(true);
         descricaoArea.setWrapStyleWord(true);
         descricaoArea.setFont(new Font("Arial", Font.PLAIN, 12));
-        descricaoArea.setBackground(new Color(220, 50, 50)); // Fundo vermelho escuro
+        descricaoArea.setBackground(new Color(220, 50, 50));
         descricaoArea.setForeground(Color.WHITE);
         descricaoArea.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
         JScrollPane descricaoScroll = new JScrollPane(descricaoArea);
         descricaoScroll.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        // Adicionar componentes ao painel
         mainPanel.add(createStyledLabel("Login:", labelFont, textColor));
         mainPanel.add(loginField);
         mainPanel.add(createStyledLabel("Senha:", labelFont, textColor));
@@ -131,7 +129,6 @@ public class TelaRegistro extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Método para criar rótulos estilizados
     private JLabel createStyledLabel(String text, Font font, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);
@@ -139,7 +136,6 @@ public class TelaRegistro extends JFrame {
         return label;
     }
 
-    // Método para criar campos de texto estilizados
     private JTextField createStyledTextField() {
         JTextField field = new JTextField(20);
         field.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -149,7 +145,6 @@ public class TelaRegistro extends JFrame {
         return field;
     }
 
-    // Método para criar botões estilizados
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
@@ -159,7 +154,6 @@ public class TelaRegistro extends JFrame {
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(120, 40));
 
-        // Efeito hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(255, 0, 0));

@@ -20,17 +20,15 @@ public class TelaConversa extends JFrame {
 
         JPanel mainPanel = new JPanel(new BorderLayout(5, 5));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        mainPanel.setBackground(Color.RED); // Fundo vermelho
+        mainPanel.setBackground(Color.RED);
 
-        // Área de mensagens
         JTextArea chatArea = new JTextArea();
         chatArea.setEditable(false);
-        chatArea.setBackground(new Color(255, 230, 230)); // Tom suave para mensagens
+        chatArea.setBackground(new Color(255, 230, 230));
         chatArea.setForeground(Color.BLACK);
         chatArea.setFont(new Font("Arial", Font.PLAIN, 14));
         JScrollPane scrollPane = new JScrollPane(chatArea);
 
-        // Campo de entrada de mensagem
         JPanel messagePanel = new JPanel(new BorderLayout(5, 0));
         messagePanel.setBackground(Color.RED);
 
@@ -44,13 +42,11 @@ public class TelaConversa extends JFrame {
         messagePanel.add(messageField, BorderLayout.CENTER);
         messagePanel.add(sendButton, BorderLayout.EAST);
 
-        // Carregar mensagens anteriores
         ArrayList<String[]> mensagens = sistema.getConversas(outroUsuario);
         for (String[] msg : mensagens) {
             chatArea.append(msg[0] + ": " + msg[1] + "\n");
         }
 
-        // Ação de enviar mensagem
         ActionListener enviarMensagem = e -> {
             String mensagem = messageField.getText().trim();
             if (!mensagem.isEmpty()) {
@@ -63,7 +59,7 @@ public class TelaConversa extends JFrame {
         };
 
         sendButton.addActionListener(enviarMensagem);
-        messageField.addActionListener(enviarMensagem); // Permite enviar com Enter
+        messageField.addActionListener(enviarMensagem);
 
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(messagePanel, BorderLayout.SOUTH);

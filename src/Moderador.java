@@ -9,7 +9,7 @@ public class Moderador {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
-                String[] denuncia = {dados[1], dados[dados.length-1]}; // nome e número de denúncias
+                String[] denuncia = {dados[1], dados[dados.length-1]};
                 denuncias.add(denuncia);
             }
             br.close();
@@ -20,6 +20,5 @@ public class Moderador {
     }
 
     public void removerUsuario(String login) {
-        // Implementar remoção do usuário dos arquivos
     }
 }

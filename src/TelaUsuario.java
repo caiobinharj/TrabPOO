@@ -14,13 +14,12 @@ public class TelaUsuario extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Área do Usuário");
         setSize(400, 600);
-        getContentPane().setBackground(new Color(200, 0, 0)); // Fundo vermelho vibrante
+        getContentPane().setBackground(new Color(200, 0, 0));
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBackground(new Color(200, 0, 0)); // Fundo vermelho do painel
+        mainPanel.setBackground(new Color(200, 0, 0));
 
-        // Criar botões estilizados
         JButton procurarMatchButton = createStyledButton("Procurar Match");
         JButton editarPerfilButton = createStyledButton("Editar Perfil");
         JButton matchesButton = createStyledButton("Matches");
@@ -31,7 +30,6 @@ public class TelaUsuario extends JFrame {
         mainPanel.add(matchesButton);
         mainPanel.add(logoutButton);
 
-        // Ações dos botões
         procurarMatchButton.addActionListener(e -> {
             new TelaProcurarMatch(sistema).setVisible(true);
             dispose();
@@ -54,27 +52,25 @@ public class TelaUsuario extends JFrame {
         });
 
         add(mainPanel);
-        setLocationRelativeTo(null);  // Centraliza a tela na tela principal
+        setLocationRelativeTo(null);
     }
 
-    // Método para criar botões estilizados
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
-        button.setBackground(new Color(180, 0, 0)); // Cor de fundo vermelha
+        button.setBackground(new Color(180, 0, 0));
         button.setBorder(new LineBorder(Color.WHITE, 2, true));
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(200, 50));
 
-        // Efeito hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(255, 0, 0)); // Efeito hover (vermelho mais claro)
+                button.setBackground(new Color(255, 0, 0));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(180, 0, 0)); // Cor original após sair do hover
+                button.setBackground(new Color(180, 0, 0));
             }
         });
 

@@ -17,13 +17,11 @@ public class TelaPerfil extends JFrame {
         setTitle("Perfil de " + usuario.getNome());
         setSize(400, 600);
 
-        // Painel principal com fundo vermelho
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBackground(new Color(200, 0, 0)); // Vermelho vibrante
+        mainPanel.setBackground(new Color(200, 0, 0));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // Estilização dos rótulos
         Font labelFont = new Font("Arial", Font.BOLD, 14);
         Color textColor = Color.WHITE;
 
@@ -48,14 +46,13 @@ public class TelaPerfil extends JFrame {
         descricaoArea.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoArea.setLineWrap(true);
         descricaoArea.setWrapStyleWord(true);
-        descricaoArea.setBackground(new Color(220, 50, 50)); // Fundo vermelho escuro
+        descricaoArea.setBackground(new Color(220, 50, 50));
         descricaoArea.setForeground(Color.WHITE);
         descricaoArea.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
         JScrollPane descricaoScroll = new JScrollPane(descricaoArea);
         descricaoScroll.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        // Adicionar componentes ao painel principal
         mainPanel.add(loginLabel);
         mainPanel.add(nomeLabel);
         mainPanel.add(idadeLabel);
@@ -73,23 +70,19 @@ public class TelaPerfil extends JFrame {
         mainPanel.add(descricaoLabel);
         mainPanel.add(descricaoScroll);
 
-        // Botão estilizado de voltar
         JButton voltarButton = createStyledButton("Voltar");
         voltarButton.addActionListener(e -> dispose());
 
-        // Painel do botão
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(200, 0, 0));
         buttonPanel.add(voltarButton);
 
-        // Adicionar tudo ao frame
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
         setLocationRelativeTo(null);
     }
 
-    // Método para criar rótulos estilizados
     private JLabel createStyledLabel(String text, Font font, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);
@@ -97,7 +90,6 @@ public class TelaPerfil extends JFrame {
         return label;
     }
 
-    // Método para criar botões estilizados
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
@@ -107,7 +99,6 @@ public class TelaPerfil extends JFrame {
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(120, 40));
 
-        // Efeito hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(255, 0, 0));

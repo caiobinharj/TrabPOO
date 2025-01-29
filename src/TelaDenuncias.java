@@ -21,7 +21,6 @@ public class TelaDenuncias extends JFrame {
 
         List<Denuncia> denuncias = sistema.getDenuncias();
 
-        // Verifica se a lista de denúncias não está nula ou vazia
         if (denuncias == null || denuncias.isEmpty()) {
             mainPanel.add(new JLabel("Não há denúncias pendentes."));
         } else {
@@ -34,17 +33,14 @@ public class TelaDenuncias extends JFrame {
                 motivoArea.setText(denuncia.getMotivo());
                 motivoArea.setEditable(false);
 
-                // Botões de ação
                 JButton revisarButton = new JButton("Revisar");
                 JButton excluirButton = new JButton("Excluir Denúncia");
                 JButton bloquearButton = new JButton("Bloquear Usuário");
 
-                // Revisar denúncia (abrir perfil)
                 revisarButton.addActionListener(e -> {
                     new TelaPerfil(sistema, denuncia.getUsuarioDenunciado()).setVisible(true);
                 });
 
-                // Excluir denúncia
                 excluirButton.addActionListener(e -> {
                     sistema.removerDenuncia(denuncia);
                     JOptionPane.showMessageDialog(this, "Denúncia excluída com sucesso!");

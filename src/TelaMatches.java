@@ -16,10 +16,9 @@ public class TelaMatches extends JFrame {
         setTitle("Seus Matches");
         setSize(350, 500);
 
-        // Painel principal com fundo vermelho
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBackground(new Color(200, 0, 0)); // Fundo vermelho vibrante
+        mainPanel.setBackground(new Color(200, 0, 0));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         ArrayList<Usuario> matches = sistema.getMatches();
@@ -49,19 +48,17 @@ public class TelaMatches extends JFrame {
                 matchPanel.add(nomeLabel);
                 matchPanel.add(conversarButton);
                 matchPanel.add(perfilButton);
-                mainPanel.add(Box.createVerticalStrut(5)); // Espaço entre os cards
+                mainPanel.add(Box.createVerticalStrut(5));
                 mainPanel.add(matchPanel);
             }
         }
 
-        // Botão voltar estilizado
         JButton voltarButton = createStyledButton("Voltar");
         voltarButton.addActionListener(e -> {
             new TelaUsuario(sistema).setVisible(true);
             dispose();
         });
 
-        // Painel para o botão de voltar
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(200, 0, 0));
         buttonPanel.add(voltarButton);
@@ -72,7 +69,6 @@ public class TelaMatches extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // Método para criar botões estilizados
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 12));
@@ -82,7 +78,6 @@ public class TelaMatches extends JFrame {
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(100, 30));
 
-        // Efeito hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(255, 0, 0));

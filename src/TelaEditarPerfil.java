@@ -19,7 +19,6 @@ public class TelaEditarPerfil extends JFrame {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         mainPanel.setBackground(Color.RED);
 
-        // Configuração dos componentes
         JTextField cidadeField = new JTextField(usuario.getCidade(), 20);
         JTextField prefMusicalField = new JTextField(usuario.getPrefMusical(), 20);
         JCheckBox bebeCheck = new JCheckBox("Sim", usuario.getBebe());
@@ -32,7 +31,6 @@ public class TelaEditarPerfil extends JFrame {
         JCheckBox exercitaCheck = new JCheckBox("Sim", usuario.getExercita());
         JTextArea descricaoArea = new JTextArea(usuario.getDescricao(), 4, 20);
 
-        // Personalizando estilos
         Color textColor = Color.WHITE;
         Font font = new Font("Arial", Font.BOLD, 14);
 

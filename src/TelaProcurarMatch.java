@@ -19,17 +19,14 @@ public class TelaProcurarMatch extends JFrame {
         setTitle("Procurar Match");
         setSize(400, 600);
 
-        // Painel principal vermelho
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBackground(new Color(200, 0, 0)); // Vermelho vibrante
+        mainPanel.setBackground(new Color(200, 0, 0));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Painel de informações do usuário
         JPanel userInfoPanel = new JPanel();
         userInfoPanel.setLayout(new BoxLayout(userInfoPanel, BoxLayout.Y_AXIS));
         userInfoPanel.setBackground(new Color(200, 0, 0));
 
-        // Fonte e cor dos textos
         Font labelFont = new Font("Arial", Font.BOLD, 14);
         Color textColor = Color.WHITE;
 
@@ -76,7 +73,6 @@ public class TelaProcurarMatch extends JFrame {
         userInfoPanel.add(descricaoLabel);
         userInfoPanel.add(descricaoScroll);
 
-        // Painel de botões estilizados
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.setBackground(new Color(200, 0, 0));
 
@@ -88,7 +84,6 @@ public class TelaProcurarMatch extends JFrame {
         buttonPanel.add(likeButton);
         buttonPanel.add(denunciarButton);
 
-        // Ação para mostrar próximo usuário
         ActionListener proximoUsuario = e -> {
             usuarioAtual = sistema.getRandomUser();
             if (usuarioAtual != null) {
@@ -147,11 +142,9 @@ public class TelaProcurarMatch extends JFrame {
         add(mainPanel);
         setLocationRelativeTo(null);
 
-        // Carregar primeiro usuário
         proximoUsuario.actionPerformed(null);
     }
 
-    // Método para criar rótulos estilizados
     private JLabel createStyledLabel(String text, Font font, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);
@@ -159,7 +152,6 @@ public class TelaProcurarMatch extends JFrame {
         return label;
     }
 
-    // Método para criar botões estilizados
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
@@ -169,7 +161,6 @@ public class TelaProcurarMatch extends JFrame {
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(120, 40));
 
-        // Efeito hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(255, 0, 0));

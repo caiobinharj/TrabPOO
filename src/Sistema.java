@@ -20,11 +20,11 @@ public class Sistema {
     }
 
     public Usuario buscarUsuarioPorLogin(String login) {
-        List<Usuario> usuarios = listarUsuarios(); // Obtém todos os usuários do sistema
+        List<Usuario> usuarios = listarUsuarios();
 
         for (Usuario u : usuarios) {
             if (u.getLogin().equals(login)) {
-                return u; // Retorna o usuário encontrado
+                return u;
             }
         }
         return null;
@@ -212,7 +212,6 @@ public class Sistema {
             fw.write(usuarioLogado.getLogin() + ";" + usuario.getLogin() + "\n");
             fw.close();
 
-            // Verificar se há match
             if (verificarMatch(usuario)) {
                 JOptionPane.showMessageDialog(null, "Você tem um novo match!");
             }
@@ -305,7 +304,6 @@ public class Sistema {
         }
     }
     public void atualizarUsuario(Usuario usuario) {
-        // Implementar atualização no arquivo
         ArrayList<String> linhas = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
@@ -313,7 +311,6 @@ public class Sistema {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
                 if (dados[0].equals(usuario.getLogin())) {
-                    // Substituir linha com dados atualizados
                     linha = String.format("%s;%s;%d;%c;%s;%s;%b;%b;%s;%s;%s;%b;%b;%c;%b;%s;%d",
                             usuario.getLogin(), usuario.getNome(), usuario.getIdade(),
                             usuario.getSexo(), usuario.getCidade(), usuario.getPrefMusical(),
@@ -326,7 +323,6 @@ public class Sistema {
             }
             br.close();
 
-            // Reescrever arquivo
             FileWriter fw = new FileWriter("usuarios.txt");
             for (String l : linhas) {
                 fw.write(l + "\n");

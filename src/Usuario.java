@@ -196,12 +196,10 @@ public class Usuario {
 
     public void salvarUsuario() {
         try {
-            // Salva login e senha
             FileWriter fw = new FileWriter("login.txt", true);
             fw.write(login + ";" + senha + "\n");
             fw.close();
 
-            // Salva outros atributos
             fw = new FileWriter("usuarios.txt", true);
             fw.write(String.format("%s;%s;%d;%c;%s;%s;%b;%b;%s;%s;%s;%b;%b;%c;%b;%s;%d\n",
                     login, nome, idade, sexo, cidade, prefMusical, bebe, fuma,

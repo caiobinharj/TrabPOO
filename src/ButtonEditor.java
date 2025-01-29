@@ -32,7 +32,6 @@ class ButtonEditor extends DefaultCellEditor {
                     "Deseja realmente remover o usuário " + nome + "?");
             if (confirm == JOptionPane.YES_OPTION) {
                 moderador.removerUsuario(nome);
-                // Atualizar a tabela
                 ((DefaultTableModel) table.getModel()).removeRow(table.getSelectedRow());
             }
         }

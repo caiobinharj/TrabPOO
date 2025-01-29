@@ -5,7 +5,8 @@ import javax.swing.*;
 public class Sistema {
     private ArrayList<Usuario> usuarios;
     private Usuario usuarioLogado;
-    private int indiceAtual = 1;
+    private int indiceAtual = 0;
+    private static final String ARQUIVO_LIKES = "likes.txt";
 
     public Sistema() {
         usuarios = new ArrayList<>();
@@ -80,15 +81,36 @@ public class Sistema {
         while (indiceAtual < usuarios.size()) {
             Usuario proximoUsuario = usuarios.get(indiceAtual);
             indiceAtual++;
-            if (!proximoUsuario.equals(usuarioLogado)) {
+            if (!proximoUsuario.equals(usuarioLogado) && !jaInteragiu(usuarioLogado, proximoUsuario)) {
                 return proximoUsuario;
             }
         }
-        indiceAtual = 1;
-        return usuarios.get(0);
+        indiceAtual = 0;
+        return null;
     }
 
+    private boolean jaInteragiu(Usuario usuario1, Usuario usuario2) {
+        Set<String> interacoes = carregarInteracoes();
 
+        String interacao = usuario1.getNome() + ";" + usuario2.getNome();
+
+        return interacoes.contains(interacao);
+    }
+
+    private Set<String> carregarInteracoes() {
+        Set<String> interacoes = new HashSet<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO_LIKES))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                interacoes.add(linha.trim());
+            }
+        } catch (IOException e) {
+            System.err.println("Erro ao ler o arquivo de interações: " + e.getMessage());
+        }
+
+        return interacoes;
+    }
 
     public void salvarConversa(String remetente, String destinatario, String mensagem) {
         try {

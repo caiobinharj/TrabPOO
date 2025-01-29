@@ -36,7 +36,9 @@ public class Sistema {
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
+
             while ((linha = br.readLine()) != null) {
+                if (linha.trim().isEmpty()) continue;
                 String[] dados = linha.split(";");
 
                 String login = dados[0];
@@ -56,6 +58,7 @@ public class Sistema {
                 boolean exercita = Boolean.parseBoolean(dados[14]);
                 String descricao = dados[15];
                 int denuncias = Integer.parseInt(dados[16]);
+                boolean moderador = dados[17].trim().equalsIgnoreCase("true");
 
                 Usuario usuario = new Usuario();
                 usuario.setLogin(login);
@@ -75,6 +78,7 @@ public class Sistema {
                 usuario.setExercita(exercita);
                 usuario.setDescricao(descricao);
                 usuario.setDenuncias(denuncias);
+                usuario.setModerador(moderador);
 
                 usuarios.add(usuario);
             }
@@ -92,7 +96,7 @@ public class Sistema {
                 if (linha.trim().isEmpty()) continue;
 
                 String[] dados = linha.split(";");
-                if (dados.length >= 17) {
+                if (dados.length >= 18) {
                     Usuario u = new Usuario();
                     u.setLogin(dados[0]);
                     u.setNome(dados[1]);
@@ -111,6 +115,7 @@ public class Sistema {
                     u.setExercita(Boolean.parseBoolean(dados[14]));
                     u.setDescricao(dados[15]);
                     u.setDenuncias(Integer.parseInt(dados[16]));
+                    u.setModerador(dados[17].trim().equalsIgnoreCase("true"));
 
                     usuarios.add(u);
                 }
@@ -120,7 +125,7 @@ public class Sistema {
         }
     }
 
-    public boolean login(String login, String senha) {
+    public Usuario login(String login, String senha) {
         try (BufferedReader br = new BufferedReader(new FileReader("login.txt"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
@@ -131,7 +136,7 @@ public class Sistema {
                     for (Usuario u : usuarios) {
                         if (u != null && u.getLogin() != null && u.getLogin().equals(login)) {
                             usuarioLogado = u;
-                            return true;
+                            return u; // Retorna o objeto Usuario correspondente
                         }
                     }
                 }
@@ -139,7 +144,7 @@ public class Sistema {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public void logout() {

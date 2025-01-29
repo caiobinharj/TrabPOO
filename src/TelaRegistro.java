@@ -112,26 +112,20 @@ public class TelaRegistro extends JFrame {
             dispose();
         });
 
-        JButton voltarButton = createStyledButton("Voltar");
-        voltarButton.addActionListener(e -> {
-            new TelaInicial().setVisible(true);
-            dispose();
-        });
-
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBackground(new Color(200, 0, 0));
         buttonPanel.add(registrarButton);
-        buttonPanel.add(voltarButton);
 
         setLayout(new BorderLayout());
-        add(new JScrollPane(mainPanel), BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        add(scrollPane, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        pack();
+        setSize(400, 600);
         setLocationRelativeTo(null);
     }
 
-    // Método para criar rótulos estilizados
     private JLabel createStyledLabel(String text, Font font, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);
@@ -139,7 +133,6 @@ public class TelaRegistro extends JFrame {
         return label;
     }
 
-    // Método para criar campos de texto estilizados
     private JTextField createStyledTextField() {
         JTextField field = new JTextField(20);
         field.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -149,27 +142,12 @@ public class TelaRegistro extends JFrame {
         return field;
     }
 
-    // Método para criar botões estilizados
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(180, 0, 0));
         button.setBorder(new LineBorder(Color.WHITE, 2, true));
-        button.setFocusPainted(false);
-        button.setPreferredSize(new Dimension(120, 40));
-
-        // Efeito hover
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(255, 0, 0));
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(180, 0, 0));
-            }
-        });
-
         return button;
     }
 }

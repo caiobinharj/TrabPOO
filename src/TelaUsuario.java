@@ -16,9 +16,12 @@ public class TelaUsuario extends JFrame {
         setSize(400, 600);
         getContentPane().setBackground(new Color(200, 0, 0)); // Fundo vermelho vibrante
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(200, 0, 0)); // Fundo vermelho do painel
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Criar botões estilizados
         JButton procurarMatchButton = createStyledButton("Procurar Match");
@@ -26,10 +29,14 @@ public class TelaUsuario extends JFrame {
         JButton matchesButton = createStyledButton("Matches");
         JButton logoutButton = createStyledButton("Logout");
 
-        mainPanel.add(procurarMatchButton);
-        mainPanel.add(editarPerfilButton);
-        mainPanel.add(matchesButton);
-        mainPanel.add(logoutButton);
+        gbc.gridy = 0;
+        mainPanel.add(procurarMatchButton, gbc);
+        gbc.gridy = 1;
+        mainPanel.add(editarPerfilButton, gbc);
+        gbc.gridy = 2;
+        mainPanel.add(matchesButton, gbc);
+        gbc.gridy = 3;
+        mainPanel.add(logoutButton, gbc);
 
         // Ações dos botões
         procurarMatchButton.addActionListener(e -> {
@@ -65,7 +72,7 @@ public class TelaUsuario extends JFrame {
         button.setBackground(new Color(180, 0, 0)); // Cor de fundo vermelha
         button.setBorder(new LineBorder(Color.WHITE, 2, true));
         button.setFocusPainted(false);
-        button.setPreferredSize(new Dimension(200, 50));
+        button.setPreferredSize(new Dimension(160, 90));
 
         // Efeito hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {

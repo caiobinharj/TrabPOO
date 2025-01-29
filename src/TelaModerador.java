@@ -6,10 +6,10 @@ import java.util.*;
 
 public class TelaModerador extends JFrame {
     private Moderador moderador;
-    private DefaultTableModel model;
-    private JTable table;
+    private Sistema sistema;
 
     public TelaModerador(Sistema sistema) {
+        this.sistema = sistema;
         this.moderador = new Moderador();
         initComponents();
     }
@@ -18,33 +18,59 @@ public class TelaModerador extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Painel do Moderador");
         setSize(400, 500);
+        getContentPane().setBackground(new Color(0, 100, 200));
 
-        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(new Color(0, 100, 200));
 
-        String[] colunas = {"Nome", "Denúncias", "Ação"};
-        model = new DefaultTableModel(colunas, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == 2;
-            }
-        };
+        JButton listarUsuariosButton = createStyledButton("Listar Usuários");
+        JButton denunciasButton = createStyledButton("Denúncias");
+        JButton logoutButton = createStyledButton("Logout");
 
-        table = new JTable(model);
+        mainPanel.add(listarUsuariosButton);
+        mainPanel.add(denunciasButton);
+        mainPanel.add(logoutButton);
 
-        TableColumn column = table.getColumnModel().getColumn(2);
-        column.setCellRenderer(new ButtonRenderer());
-        column.setCellEditor(new ButtonEditor(new JCheckBox()));
+        // Ações dos botões
+        listarUsuariosButton.addActionListener(e -> {
+            new TelaListarUsuarios(sistema).setVisible(true);
+            dispose();
+        });
 
-        ArrayList<String[]> denuncias = moderador.consultarDenuncias();
-        for (String[] denuncia : denuncias) {
-            model.addRow(new Object[]{denuncia[0], denuncia[1], "Remover"});
-        }
+        denunciasButton.addActionListener(e -> {
+            new TelaDenuncias(sistema).setVisible(true);
+            dispose();
+        });
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        logoutButton.addActionListener(e -> {
+            sistema.logout();
+            new TelaInicial().setVisible(true);
+            dispose();
+        });
 
         add(mainPanel);
         setLocationRelativeTo(null);
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(0, 80, 180));
+        button.setFocusPainted(false);
+        button.setPreferredSize(new Dimension(200, 50));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 120, 220));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 80, 180));
+            }
+        });
+
+        return button;
     }
 }

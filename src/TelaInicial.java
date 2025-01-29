@@ -59,8 +59,17 @@ public class TelaInicial extends JFrame {
         mainPanel.add(registroButton, gbc);
 
         loginButton.addActionListener(e -> {
-            if (sistema.login(loginField.getText(), new String(senhaField.getPassword()))) {
-                new TelaUsuario(sistema).setVisible(true);
+            String login = loginField.getText();
+            String senha = new String(senhaField.getPassword());
+
+            Usuario usuario = sistema.login(login, senha);
+
+            if (usuario != null) {
+                if (usuario.isModerador()) {
+                    new TelaModerador(sistema).setVisible(true);
+                } else {
+                    new TelaUsuario(sistema).setVisible(true);
+                }
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Login inválido!");

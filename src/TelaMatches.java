@@ -42,7 +42,10 @@ public class TelaMatches extends JFrame {
         }
 
         JButton voltarButton = new JButton("Voltar");
-        voltarButton.addActionListener(e -> dispose());
+        voltarButton.addActionListener(e -> {
+            new TelaUsuario(sistema).setVisible(true);
+            dispose();
+        });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(voltarButton);

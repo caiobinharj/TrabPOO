@@ -1,5 +1,7 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+
 public class TelaRegistro extends JFrame {
     private Sistema sistema;
     private Usuario novoUsuario;
@@ -15,62 +17,79 @@ public class TelaRegistro extends JFrame {
         setTitle("Registro de Novo Usuário");
 
         JPanel mainPanel = new JPanel(new GridLayout(0, 2, 5, 5));
+        mainPanel.setBackground(new Color(200, 0, 0)); // Fundo vermelho vibrante
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // Fonte e cores
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Color textColor = Color.WHITE;
+
         // Campos de registro
-        JTextField loginField = new JTextField(20);
+        JTextField loginField = createStyledTextField();
         JPasswordField senhaField = new JPasswordField(20);
-        JTextField nomeField = new JTextField(20);
+        senhaField.setFont(labelFont);
+        senhaField.setForeground(Color.BLACK);
+
+        JTextField nomeField = createStyledTextField();
         JSpinner idadeSpinner = new JSpinner(new SpinnerNumberModel(18, 18, 100, 1));
         JComboBox<String> sexoCombo = new JComboBox<>(new String[]{"Masculino", "Feminino", "Prefiro não declarar"});
-        JTextField cidadeField = new JTextField(20);
-        JTextField prefMusicalField = new JTextField(20);
+        JTextField cidadeField = createStyledTextField();
+        JTextField prefMusicalField = createStyledTextField();
         JCheckBox bebeCheck = new JCheckBox();
         JCheckBox fumaCheck = new JCheckBox();
-        JTextField orientacaoField = new JTextField(20);
-        JTextField fotoField = new JTextField(20);
-        JTextField hobbiesField = new JTextField(20);
+        JTextField orientacaoField = createStyledTextField();
+        JTextField hobbiesField = createStyledTextField();
         JCheckBox trabalhaCheck = new JCheckBox();
         JCheckBox faculdadeCheck = new JCheckBox();
         JComboBox<String> periodoCombo = new JComboBox<>(new String[]{"Diurno", "Noturno"});
         JCheckBox exercitaCheck = new JCheckBox();
+
         JTextArea descricaoArea = new JTextArea(4, 20);
+        descricaoArea.setLineWrap(true);
+        descricaoArea.setWrapStyleWord(true);
+        descricaoArea.setFont(new Font("Arial", Font.PLAIN, 12));
+        descricaoArea.setBackground(new Color(220, 50, 50)); // Fundo vermelho escuro
+        descricaoArea.setForeground(Color.WHITE);
+        descricaoArea.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+
+        JScrollPane descricaoScroll = new JScrollPane(descricaoArea);
+        descricaoScroll.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         // Adicionar componentes ao painel
-        mainPanel.add(new JLabel("Login:"));
+        mainPanel.add(createStyledLabel("Login:", labelFont, textColor));
         mainPanel.add(loginField);
-        mainPanel.add(new JLabel("Senha:"));
+        mainPanel.add(createStyledLabel("Senha:", labelFont, textColor));
         mainPanel.add(senhaField);
-        mainPanel.add(new JLabel("Nome:"));
+        mainPanel.add(createStyledLabel("Nome:", labelFont, textColor));
         mainPanel.add(nomeField);
-        mainPanel.add(new JLabel("Idade:"));
+        mainPanel.add(createStyledLabel("Idade:", labelFont, textColor));
         mainPanel.add(idadeSpinner);
-        mainPanel.add(new JLabel("Sexo:"));
+        mainPanel.add(createStyledLabel("Sexo:", labelFont, textColor));
         mainPanel.add(sexoCombo);
-        mainPanel.add(new JLabel("Cidade:"));
+        mainPanel.add(createStyledLabel("Cidade:", labelFont, textColor));
         mainPanel.add(cidadeField);
-        mainPanel.add(new JLabel("Preferência Musical:"));
+        mainPanel.add(createStyledLabel("Preferência Musical:", labelFont, textColor));
         mainPanel.add(prefMusicalField);
-        mainPanel.add(new JLabel("Bebe?"));
+        mainPanel.add(createStyledLabel("Bebe?", labelFont, textColor));
         mainPanel.add(bebeCheck);
-        mainPanel.add(new JLabel("Fuma?"));
+        mainPanel.add(createStyledLabel("Fuma?", labelFont, textColor));
         mainPanel.add(fumaCheck);
-        mainPanel.add(new JLabel("Orientação:"));
+        mainPanel.add(createStyledLabel("Orientação:", labelFont, textColor));
         mainPanel.add(orientacaoField);
-        mainPanel.add(new JLabel("Hobbies:"));
+        mainPanel.add(createStyledLabel("Hobbies:", labelFont, textColor));
         mainPanel.add(hobbiesField);
-        mainPanel.add(new JLabel("Trabalha?"));
+        mainPanel.add(createStyledLabel("Trabalha?", labelFont, textColor));
         mainPanel.add(trabalhaCheck);
-        mainPanel.add(new JLabel("Faculdade?"));
+        mainPanel.add(createStyledLabel("Faculdade?", labelFont, textColor));
         mainPanel.add(faculdadeCheck);
-        mainPanel.add(new JLabel("Período:"));
+        mainPanel.add(createStyledLabel("Período:", labelFont, textColor));
         mainPanel.add(periodoCombo);
-        mainPanel.add(new JLabel("Se exercita?"));
+        mainPanel.add(createStyledLabel("Se exercita?", labelFont, textColor));
         mainPanel.add(exercitaCheck);
-        mainPanel.add(new JLabel("Descrição:"));
-        mainPanel.add(new JScrollPane(descricaoArea));
+        mainPanel.add(createStyledLabel("Descrição:", labelFont, textColor));
+        mainPanel.add(descricaoScroll);
 
-        JButton registrarButton = new JButton("Registrar");
+        JButton registrarButton = createStyledButton("Registrar");
         registrarButton.addActionListener(e -> {
             novoUsuario.setLogin(loginField.getText());
             novoUsuario.setSenha(new String(senhaField.getPassword()));
@@ -93,8 +112,16 @@ public class TelaRegistro extends JFrame {
             dispose();
         });
 
+        JButton voltarButton = createStyledButton("Voltar");
+        voltarButton.addActionListener(e -> {
+            new TelaInicial().setVisible(true);
+            dispose();
+        });
+
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(200, 0, 0));
         buttonPanel.add(registrarButton);
+        buttonPanel.add(voltarButton);
 
         setLayout(new BorderLayout());
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
@@ -102,5 +129,47 @@ public class TelaRegistro extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    // Método para criar rótulos estilizados
+    private JLabel createStyledLabel(String text, Font font, Color color) {
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        label.setForeground(color);
+        return label;
+    }
+
+    // Método para criar campos de texto estilizados
+    private JTextField createStyledTextField() {
+        JTextField field = new JTextField(20);
+        field.setFont(new Font("Arial", Font.PLAIN, 14));
+        field.setForeground(Color.BLACK);
+        field.setBackground(Color.WHITE);
+        field.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+        return field;
+    }
+
+    // Método para criar botões estilizados
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(180, 0, 0));
+        button.setBorder(new LineBorder(Color.WHITE, 2, true));
+        button.setFocusPainted(false);
+        button.setPreferredSize(new Dimension(120, 40));
+
+        // Efeito hover
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(255, 0, 0));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(180, 0, 0));
+            }
+        });
+
+        return button;
     }
 }

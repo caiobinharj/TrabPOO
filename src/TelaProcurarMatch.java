@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 
 public class TelaProcurarMatch extends JFrame {
@@ -9,6 +10,7 @@ public class TelaProcurarMatch extends JFrame {
 
     public TelaProcurarMatch(Sistema sistema) {
         this.sistema = sistema;
+        this.usuarioLogado = sistema.getUsuarioLogado();
         initComponents();
     }
 
@@ -17,28 +19,46 @@ public class TelaProcurarMatch extends JFrame {
         setTitle("Procurar Match");
         setSize(400, 600);
 
+        // Painel principal vermelho
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBackground(new Color(200, 0, 0)); // Vermelho vibrante
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Painel para exibir informações do usuário
+        // Painel de informações do usuário
         JPanel userInfoPanel = new JPanel();
         userInfoPanel.setLayout(new BoxLayout(userInfoPanel, BoxLayout.Y_AXIS));
+        userInfoPanel.setBackground(new Color(200, 0, 0));
 
-        JLabel nomeLabel = new JLabel();
-        JLabel idadeLabel = new JLabel();
-        JLabel sexoLabel = new JLabel();
-        JLabel cidadeLabel = new JLabel();
-        JLabel prefMusicalLabel = new JLabel();
-        JLabel bebeLabel = new JLabel();
-        JLabel fumaLabel = new JLabel();
-        JLabel orientacaoLabel = new JLabel();
-        JLabel hobbiesLabel = new JLabel();
-        JLabel trabalhaLabel = new JLabel();
-        JLabel faculdadeLabel = new JLabel();
-        JLabel periodoLabel = new JLabel();
-        JLabel exercitaLabel = new JLabel();
+        // Fonte e cor dos textos
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Color textColor = Color.WHITE;
+
+        JLabel nomeLabel = createStyledLabel("", labelFont, textColor);
+        JLabel idadeLabel = createStyledLabel("", labelFont, textColor);
+        JLabel sexoLabel = createStyledLabel("", labelFont, textColor);
+        JLabel cidadeLabel = createStyledLabel("", labelFont, textColor);
+        JLabel prefMusicalLabel = createStyledLabel("", labelFont, textColor);
+        JLabel bebeLabel = createStyledLabel("", labelFont, textColor);
+        JLabel fumaLabel = createStyledLabel("", labelFont, textColor);
+        JLabel orientacaoLabel = createStyledLabel("", labelFont, textColor);
+        JLabel hobbiesLabel = createStyledLabel("", labelFont, textColor);
+        JLabel trabalhaLabel = createStyledLabel("", labelFont, textColor);
+        JLabel faculdadeLabel = createStyledLabel("", labelFont, textColor);
+        JLabel periodoLabel = createStyledLabel("", labelFont, textColor);
+        JLabel exercitaLabel = createStyledLabel("", labelFont, textColor);
+        JLabel descricaoLabel = createStyledLabel("Descrição:", labelFont, textColor);
+
         JTextArea descricaoArea = new JTextArea(4, 20);
         descricaoArea.setEditable(false);
+        descricaoArea.setLineWrap(true);
+        descricaoArea.setWrapStyleWord(true);
+        descricaoArea.setFont(new Font("Arial", Font.PLAIN, 12));
+        descricaoArea.setBackground(new Color(220, 50, 50)); // Fundo vermelho escuro
+        descricaoArea.setForeground(Color.WHITE);
+        descricaoArea.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+
+        JScrollPane descricaoScroll = new JScrollPane(descricaoArea);
+        descricaoScroll.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         userInfoPanel.add(nomeLabel);
         userInfoPanel.add(idadeLabel);
@@ -53,20 +73,22 @@ public class TelaProcurarMatch extends JFrame {
         userInfoPanel.add(faculdadeLabel);
         userInfoPanel.add(periodoLabel);
         userInfoPanel.add(exercitaLabel);
-        userInfoPanel.add(new JLabel("Descrição:"));
-        userInfoPanel.add(new JScrollPane(descricaoArea));
+        userInfoPanel.add(descricaoLabel);
+        userInfoPanel.add(descricaoScroll);
 
-        // Botões de ação
+        // Painel de botões estilizados
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        JButton dislikeButton = new JButton("Dislike");
-        JButton likeButton = new JButton("Like");
-        JButton denunciarButton = new JButton("Denunciar");
+        buttonPanel.setBackground(new Color(200, 0, 0));
+
+        JButton dislikeButton = createStyledButton("Dislike");
+        JButton likeButton = createStyledButton("Like");
+        JButton denunciarButton = createStyledButton("Denunciar");
 
         buttonPanel.add(dislikeButton);
         buttonPanel.add(likeButton);
         buttonPanel.add(denunciarButton);
 
-        // Ação de mostrar o próximo usuário
+        // Ação para mostrar próximo usuário
         ActionListener proximoUsuario = e -> {
             usuarioAtual = sistema.getRandomUser();
             if (usuarioAtual != null) {
@@ -92,8 +114,10 @@ public class TelaProcurarMatch extends JFrame {
             }
         };
 
-
-        dislikeButton.addActionListener(proximoUsuario);
+        dislikeButton.addActionListener(e -> {
+            sistema.darDislike(usuarioAtual);
+            proximoUsuario.actionPerformed(null);
+        });
 
         likeButton.addActionListener(e -> {
             sistema.darLike(usuarioAtual);
@@ -106,20 +130,56 @@ public class TelaProcurarMatch extends JFrame {
             proximoUsuario.actionPerformed(null);
         });
 
-        JButton voltarButton = new JButton("Voltar");
+        JButton voltarButton = createStyledButton("Voltar");
         voltarButton.addActionListener(e -> {
             new TelaUsuario(sistema).setVisible(true);
             dispose();
         });
 
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(new Color(200, 0, 0));
+        topPanel.add(voltarButton);
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(userInfoPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-        mainPanel.add(voltarButton, BorderLayout.NORTH);
 
         add(mainPanel);
         setLocationRelativeTo(null);
 
         // Carregar primeiro usuário
         proximoUsuario.actionPerformed(null);
+    }
+
+    // Método para criar rótulos estilizados
+    private JLabel createStyledLabel(String text, Font font, Color color) {
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        label.setForeground(color);
+        return label;
+    }
+
+    // Método para criar botões estilizados
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(180, 0, 0));
+        button.setBorder(new LineBorder(Color.WHITE, 2, true));
+        button.setFocusPainted(false);
+        button.setPreferredSize(new Dimension(120, 40));
+
+        // Efeito hover
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(255, 0, 0));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(180, 0, 0));
+            }
+        });
+
+        return button;
     }
 }

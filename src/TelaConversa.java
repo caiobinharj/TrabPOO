@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class TelaConversa extends JFrame {
     private Sistema sistema;
@@ -20,16 +20,26 @@ public class TelaConversa extends JFrame {
 
         JPanel mainPanel = new JPanel(new BorderLayout(5, 5));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        mainPanel.setBackground(Color.RED); // Fundo vermelho
 
         // Área de mensagens
         JTextArea chatArea = new JTextArea();
         chatArea.setEditable(false);
+        chatArea.setBackground(new Color(255, 230, 230)); // Tom suave para mensagens
+        chatArea.setForeground(Color.BLACK);
+        chatArea.setFont(new Font("Arial", Font.PLAIN, 14));
         JScrollPane scrollPane = new JScrollPane(chatArea);
 
         // Campo de entrada de mensagem
         JPanel messagePanel = new JPanel(new BorderLayout(5, 0));
+        messagePanel.setBackground(Color.RED);
+
         JTextField messageField = new JTextField();
+        messageField.setFont(new Font("Arial", Font.PLAIN, 14));
         JButton sendButton = new JButton("Enviar");
+        sendButton.setBackground(Color.WHITE);
+        sendButton.setForeground(Color.BLACK);
+        sendButton.setFont(new Font("Arial", Font.BOLD, 14));
 
         messagePanel.add(messageField, BorderLayout.CENTER);
         messagePanel.add(sendButton, BorderLayout.EAST);

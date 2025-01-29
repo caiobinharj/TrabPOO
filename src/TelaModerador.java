@@ -9,7 +9,7 @@ public class TelaModerador extends JFrame {
     private DefaultTableModel model;
     private JTable table;
 
-    public TelaModerador() {
+    public TelaModerador(Sistema sistema) {
         this.moderador = new Moderador();
         initComponents();
     }

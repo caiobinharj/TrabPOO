@@ -1,6 +1,0 @@
-caio;marco
-caio;julia
-caio;pedro
-caio;camila
-caio;andre
-caio;joao

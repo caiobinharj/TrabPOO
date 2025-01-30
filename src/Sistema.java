@@ -97,7 +97,7 @@ public class Sistema {
                 if (linha.trim().isEmpty()) continue;
 
                 String[] dados = linha.split(";");
-                if (dados.length > 17) { // Deve ser > 17, pois queremos acessar até o índice 17
+                if (dados.length > 17) {
                     Usuario u = new Usuario();
                     u.setLogin(dados[0]);
                     u.setNome(dados[1]);
@@ -116,7 +116,7 @@ public class Sistema {
                     u.setExercita(Boolean.parseBoolean(dados[14]));
                     u.setDescricao(dados[15]);
                     u.setDenuncias(Integer.parseInt(dados[16]));
-                    u.setModerador(dados[17].trim().equalsIgnoreCase("true")); // Agora seguro
+                    u.setModerador(dados[17].trim().equalsIgnoreCase("true"));
 
                     usuarios.add(u);
                 } else {
@@ -132,7 +132,6 @@ public class Sistema {
         List<Usuario> usuarios = listarUsuarios();
         usuarios.removeIf(u -> u.getLogin().equals(login));
 
-        // Atualiza o arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_USUARIOS))) {
             for (Usuario u : usuarios) {
                 writer.write(u.getLogin() + ";" + u.getSenha() + ";" + u.getNome());
@@ -142,7 +141,6 @@ public class Sistema {
             e.printStackTrace();
         }
 
-        // Remove denúncias relacionadas a esse usuário
         List<Denuncia> denuncias = carregarDenuncias();
         denuncias.removeIf(d -> d.getUsuarioDenunciado().getLogin().equals(login));
 
@@ -168,7 +166,7 @@ public class Sistema {
                     for (Usuario u : usuarios) {
                         if (u != null && u.getLogin() != null && u.getLogin().equals(login)) {
                             usuarioLogado = u;
-                            return u; // Retorna o objeto Usuario correspondente
+                            return u;
                         }
                     }
                 }
@@ -249,7 +247,6 @@ public class Sistema {
             fw.write(usuarioLogado.getLogin() + ";" + usuario.getLogin() + "\n");
             fw.close();
 
-            // Verificar se há match
             if (verificarMatch(usuario)) {
                 JOptionPane.showMessageDialog(null, "Você tem um novo match!");
             }
@@ -333,7 +330,6 @@ public class Sistema {
     }
 
     public void removerDenuncia(Denuncia denunciaRemover) {
-        // Carrega todas as denúncias atuais do arquivo
         List<String> linhasAtualizadas = new ArrayList<>();
         boolean denunciaEncontrada = false;
 
@@ -341,7 +337,6 @@ public class Sistema {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
-                // Verifica se a linha atual corresponde à denúncia que queremos remover
                 if (!dados[0].equals(denunciaRemover.getDenunciante().getLogin()) ||
                         !dados[1].equals(denunciaRemover.getUsuarioDenunciado().getLogin()) ||
                         !dados[2].equals(denunciaRemover.getMotivo())) {
@@ -355,7 +350,6 @@ public class Sistema {
             return;
         }
 
-        // Se encontrou a denúncia, atualiza o arquivo e o usuário
         if (denunciaEncontrada) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_DENUNCIAS))) {
                 for (String linha : linhasAtualizadas) {
@@ -363,7 +357,6 @@ public class Sistema {
                     writer.newLine();
                 }
 
-                // Decrementa o contador de denúncias do usuário
                 Usuario usuarioDenunciado = denunciaRemover.getUsuarioDenunciado();
                 if (usuarioDenunciado != null) {
                     int denunciasAtuais = usuarioDenunciado.getDenuncias();
@@ -383,7 +376,6 @@ public class Sistema {
     }
 
     public void atualizarUsuario(Usuario usuario) {
-        // Lista para armazenar as linhas atualizadas
         ArrayList<String> linhas = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
@@ -392,9 +384,7 @@ public class Sistema {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
 
-                // Verifica se a linha corresponde ao usuário que está sendo atualizado
                 if (dados[0].equals(usuario.getLogin())) {
-                    // Substituir a linha com os dados atualizados
                     linha = String.format("%s;%s;%d;%c;%s;%s;%b;%b;%s;%s;%s;%b;%b;%c;%b;%s;%d;%b",
                             usuario.getLogin(), usuario.getNome(), usuario.getIdade(),
                             usuario.getSexo(), usuario.getCidade(), usuario.getPrefMusical(),
@@ -404,14 +394,12 @@ public class Sistema {
                             usuario.getDescricao(), usuario.getDenuncias(), usuario.isModerador());
                 }
 
-                // Adicionar a linha (atualizada ou não) na lista
                 linhas.add(linha);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // Reescrever o arquivo com as linhas atualizadas
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt"))) {
             for (String l : linhas) {
                 writer.write(l + "\n");

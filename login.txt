@@ -27,3 +27,5 @@ beatriz;123
 henrique;123
 lucas;123
 lara;123
+jony;123
+jose;123

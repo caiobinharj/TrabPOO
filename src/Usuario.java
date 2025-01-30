@@ -190,10 +190,10 @@ public class Usuario {
             fw.close();
 
             fw = new FileWriter("usuarios.txt", true);
-            fw.write(String.format("%s;%s;%d;%c;%s;%s;%b;%b;%s;%s;%s;%b;%b;%c;%b;%s;%d\n",
+            fw.write(String.format("%s;%s;%d;%c;%s;%s;%b;%b;%s;%s;%s;%b;%b;%c;%b;%s;%d;%b\n",
                     login, nome, idade, sexo, cidade, prefMusical, bebe, fuma,
                     orientacaoSexual, foto, hobbies, trabalha, faculdade,
-                    periodo, exercita, descricao, denuncias));
+                    periodo, exercita, descricao, denuncias, moderador));
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

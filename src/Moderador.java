@@ -29,7 +29,6 @@ public class Moderador extends Usuario {
 
     public void removerUsuario(String nome) {
         try {
-            // Encontra o login do usuário pelo nome
             final String loginParaRemover = sistema.listarUsuarios().stream()
                     .filter(u -> u.getNome().equals(nome))
                     .map(Usuario::getLogin)
@@ -40,7 +39,6 @@ public class Moderador extends Usuario {
                 List<Usuario> usuarios = sistema.listarUsuarios();
                 usuarios.removeIf(u -> u.getLogin().equals(loginParaRemover));
 
-                // Atualiza o arquivo mantendo o formato completo
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt"))) {
                     for (Usuario u : usuarios) {
                         writer.write(String.format("%s;%s;%d;%c;%s;%s;%b;%b;%s;%s;%s;%b;%b;%c;%b;%s;%d;%b",
@@ -67,7 +65,6 @@ public class Moderador extends Usuario {
                     }
                 }
 
-                // Remove denúncias relacionadas a esse usuário
                 List<Denuncia> denuncias = sistema.carregarDenuncias();
                 denuncias.removeIf(d -> d.getUsuarioDenunciado().getLogin().equals(loginParaRemover));
 

@@ -103,6 +103,7 @@ public class TelaRegistro extends JFrame {
             novoUsuario.setPeriodo(periodoCombo.getSelectedItem().toString().charAt(0));
             novoUsuario.setExercita(exercitaCheck.isSelected());
             novoUsuario.setDescricao(descricaoArea.getText());
+            novoUsuario.setModerador(false);
             novoUsuario.salvarUsuario();
             JOptionPane.showMessageDialog(this, "Usuário registrado com sucesso!");
             new TelaInicial().setVisible(true);

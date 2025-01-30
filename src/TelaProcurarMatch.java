@@ -1,6 +1,5 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 
 public class TelaProcurarMatch extends JFrame {
@@ -29,6 +28,9 @@ public class TelaProcurarMatch extends JFrame {
 
         Font labelFont = new Font("Arial", Font.BOLD, 14);
         Color textColor = Color.WHITE;
+
+
+
 
         JLabel nomeLabel = createStyledLabel("", labelFont, textColor);
         JLabel idadeLabel = createStyledLabel("", labelFont, textColor);
@@ -75,7 +77,7 @@ public class TelaProcurarMatch extends JFrame {
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.setBackground(new Color(200, 0, 0));
-
+        buttonPanel.setLayout(new GridLayout(1, 3, 10, 10));
         JButton dislikeButton = createStyledButton("Dislike");
         JButton likeButton = createStyledButton("Like");
         JButton denunciarButton = createStyledButton("Denunciar");
@@ -84,6 +86,7 @@ public class TelaProcurarMatch extends JFrame {
         buttonPanel.add(likeButton);
         buttonPanel.add(denunciarButton);
 
+        // Ações dos botões
         ActionListener proximoUsuario = e -> {
             usuarioAtual = sistema.getRandomUser();
             if (usuarioAtual != null) {
@@ -101,6 +104,7 @@ public class TelaProcurarMatch extends JFrame {
                 periodoLabel.setText("Período: " + usuarioAtual.getPeriodo());
                 exercitaLabel.setText("Se exercita? " + (usuarioAtual.getExercita() ? "Sim" : "Não"));
                 descricaoArea.setText(usuarioAtual.getDescricao());
+                // Atualizar foto
             } else {
                 nomeLabel.setText("Nenhum usuário disponível");
                 idadeLabel.setText("");
@@ -142,6 +146,7 @@ public class TelaProcurarMatch extends JFrame {
         add(mainPanel);
         setLocationRelativeTo(null);
 
+        // Carregar primeiro usuário
         proximoUsuario.actionPerformed(null);
     }
 
@@ -157,7 +162,6 @@ public class TelaProcurarMatch extends JFrame {
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(180, 0, 0));
-        button.setBorder(new LineBorder(Color.WHITE, 2, true));
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(120, 40));
 

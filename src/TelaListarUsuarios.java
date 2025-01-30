@@ -19,15 +19,24 @@ public class TelaListarUsuarios extends JFrame {
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        String[] colunas = {"Nome", "Cidade", "Editar"};
+        // Mudança nas colunas para mostrar denúncias ao invés de cidade
+        String[] colunas = {"Nome", "Denúncias", "Ação"};
         modelo = new DefaultTableModel(colunas, 0);
         tabelaUsuarios = new JTable(modelo);
 
         // Adicionar dados dos usuários
         ArrayList<Usuario> usuarios = (ArrayList<Usuario>) sistema.listarUsuarios();
         for (Usuario usuario : usuarios) {
-            modelo.addRow(new Object[]{usuario.getNome(), usuario.getCidade(), "Editar"});
+            modelo.addRow(new Object[]{
+                    usuario.getNome(),
+                    usuario.getDenuncias(),
+                    "Remover"  // Mudança de "Editar" para "Remover"
+            });
         }
+
+        // Configurar o renderer e editor para a coluna do botão
+        tabelaUsuarios.getColumn("Ação").setCellRenderer(new ButtonRenderer());
+        tabelaUsuarios.getColumn("Ação").setCellEditor(new ButtonEditor(new JCheckBox()));
 
         JScrollPane scrollPane = new JScrollPane(tabelaUsuarios);
         add(scrollPane, BorderLayout.CENTER);

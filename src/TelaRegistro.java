@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-
 public class TelaRegistro extends JFrame {
     private Sistema sistema;
     private Usuario novoUsuario;

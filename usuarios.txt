@@ -1,6 +1,6 @@
-caio;caio;18; ;niteroi;nenhuma;true;true;Hétero;null;Baseball;true;true;D;true;sou aventureiro;3
+caio;caio;18; ;niteroi;nenhuma;true;true;Hétero;null;Baseball;true;true;D;true;sou aventureiro;3;false
 marco;marco;22; ;rio de janeiro;rock;true;true;Hétero;null;Futebol;true;true;N;true;gosto de sair;2;false
-julia;julia;20; ;sao paulo;pop;false;true;Lésbica;null;Dançar;true;false;D;true;gosto de festas;1;true
+julia;julia;20; ;sao paulo;pop;false;true;Lésbica;null;Dançar;true;false;D;true;gosto de festas;0;true
 lucas;lucas;25; ;belo horizonte;indie;true;false;Gay;null;Correr;true;true;N;true;gosto de animais;0;false
 maria;maria;28; ;recife;jazz;true;false;Hétero;null;Cozinhar;false;true;D;false;adoro música clássica;1;false
 pedro;pedro;30; ;curitiba;rock;false;true;Pansexual;null;Jogar videogame;true;true;D;true;gosto de tecnologia;2;false
@@ -16,7 +16,7 @@ felipe;felipe;20; ;curitiba;jazz;false;true;Hétero;null;Correr;true;false;D;tru
 aline;aline;24; ;porto alegre;eletronica;true;false;Lésbica;null;Viajar;true;true;N;true;gosto de fotografia;2;false
 ricardo;ricardo;31; ;florianopolis;rap;true;true;Pansexual;null;Jogar videogame;true;true;D;true;gosto de cinema;0;false
 luana;luana;19; ;salvador;mpb;false;false;Hétero;null;Cozinhar;true;true;D;false;gosto de história;2;false
-pedro;pedro;23; ;sao paulo;rock;true;false;Transexual;null;Caminhada;false;true;N;true;gosto de viajar;3;false
+pedro;pedro;30; ;curitiba;rock;false;true;Pansexual;null;Jogar videogame;true;true;D;true;gosto de tecnologia;2;false
 thais;thais;20; ;belo horizonte;indie;true;false;Lésbica;null;Dançar;true;true;D;false;gosto de cinema;1;false
 rafael;rafael;28; ;porto alegre;sertanejo;false;true;Gay;null;Academia;true;false;D;true;gosto de cozinhar;0;false
 gabriela;gabriela;25; ;rio de janeiro;jazz;true;true;Pansexual;null;Futebol;false;true;N;true;gosto de natureza;4;false

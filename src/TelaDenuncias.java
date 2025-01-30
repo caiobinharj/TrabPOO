@@ -19,40 +19,31 @@ public class TelaDenuncias extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        List<Denuncia> denuncias = sistema.getDenuncias();
+        List<Denuncia> denuncias = sistema.carregarDenuncias();
 
-        if (denuncias == null || denuncias.isEmpty()) {
+        if (denuncias.isEmpty()) {
             mainPanel.add(new JLabel("Não há denúncias pendentes."));
         } else {
             for (Denuncia denuncia : denuncias) {
                 JPanel denunciaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 denunciaPanel.setBorder(BorderFactory.createEtchedBorder());
 
-                JLabel usuarioDenunciadoLabel = new JLabel("Usuário: " + denuncia.getUsuarioDenunciado().getNome());
+                JLabel usuarioDenunciadoLabel = new JLabel("Denunciado: " + denuncia.getUsuarioDenunciado().getNome());
                 JTextArea motivoArea = new JTextArea(3, 25);
                 motivoArea.setText(denuncia.getMotivo());
                 motivoArea.setEditable(false);
 
-                JButton revisarButton = new JButton("Revisar");
                 JButton excluirButton = new JButton("Excluir Denúncia");
-                JButton bloquearButton = new JButton("Bloquear Usuário");
-
-                revisarButton.addActionListener(e -> {
-                    new TelaPerfil(sistema, denuncia.getUsuarioDenunciado()).setVisible(true);
-                });
-
                 excluirButton.addActionListener(e -> {
                     sistema.removerDenuncia(denuncia);
-                    JOptionPane.showMessageDialog(this, "Denúncia excluída com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Denúncia removida!");
                     dispose();
                     new TelaDenuncias(sistema).setVisible(true);
                 });
 
                 denunciaPanel.add(usuarioDenunciadoLabel);
                 denunciaPanel.add(new JScrollPane(motivoArea));
-                denunciaPanel.add(revisarButton);
                 denunciaPanel.add(excluirButton);
-                denunciaPanel.add(bloquearButton);
 
                 mainPanel.add(denunciaPanel);
             }
@@ -69,7 +60,6 @@ public class TelaDenuncias extends JFrame {
 
         add(new JScrollPane(mainPanel), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-
         setLocationRelativeTo(null);
     }
 }

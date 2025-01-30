@@ -1,5 +1,5 @@
-caio;caio;18; ;niteroi;nenhuma;true;true;Hétero;null;Baseball;true;true;D;true;sou aventureiro;3
-marco;marco;22; ;rio de janeiro;rock;true;true;Hétero;null;Futebol;true;true;N;true;gosto de sair;2;false
+caio;caio;18; ;niteroi;nenhuma;true;true;Hétero;null;Baseball;true;true;D;true;sou aventureiro;3;false
+marco;marco;22; ;rio de janeiro;rock;true;true;Hétero;null;Futebol;true;true;N;true;gosto de sair;6;false
 julia;julia;20; ;sao paulo;pop;false;true;Lésbica;null;Dançar;true;false;D;true;gosto de festas;1;true
 lucas;lucas;25; ;belo horizonte;indie;true;false;Gay;null;Correr;true;true;N;true;gosto de animais;0;false
 maria;maria;28; ;recife;jazz;true;false;Hétero;null;Cozinhar;false;true;D;false;adoro música clássica;1;false

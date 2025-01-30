@@ -39,7 +39,6 @@ public class TelaPerfil extends JFrame{
         JTextArea descricaoArea = new JTextArea(usuario.getDescricao(), 4, 20);
         descricaoArea.setEditable(false);
 
-        // Adicionar componentes ao painel
         mainPanel.add(loginLabel);
         mainPanel.add(nomeLabel);
         mainPanel.add(idadeLabel);

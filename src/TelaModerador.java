@@ -32,7 +32,6 @@ public class TelaModerador extends JFrame {
         mainPanel.add(denunciasButton);
         mainPanel.add(logoutButton);
 
-        // Ações dos botões
         listarUsuariosButton.addActionListener(e -> {
             new TelaListarUsuarios(sistema).setVisible(true);
             dispose();

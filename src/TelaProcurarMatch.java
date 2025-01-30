@@ -52,7 +52,7 @@ public class TelaProcurarMatch extends JFrame {
         descricaoArea.setLineWrap(true);
         descricaoArea.setWrapStyleWord(true);
         descricaoArea.setFont(new Font("Arial", Font.PLAIN, 12));
-        descricaoArea.setBackground(new Color(220, 50, 50)); // Fundo vermelho escuro
+        descricaoArea.setBackground(new Color(220, 50, 50));
         descricaoArea.setForeground(Color.WHITE);
         descricaoArea.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
@@ -86,7 +86,6 @@ public class TelaProcurarMatch extends JFrame {
         buttonPanel.add(likeButton);
         buttonPanel.add(denunciarButton);
 
-        // Ações dos botões
         ActionListener proximoUsuario = e -> {
             usuarioAtual = sistema.getRandomUser();
             if (usuarioAtual != null) {
@@ -104,7 +103,6 @@ public class TelaProcurarMatch extends JFrame {
                 periodoLabel.setText("Período: " + usuarioAtual.getPeriodo());
                 exercitaLabel.setText("Se exercita? " + (usuarioAtual.getExercita() ? "Sim" : "Não"));
                 descricaoArea.setText(usuarioAtual.getDescricao());
-                // Atualizar foto
             } else {
                 nomeLabel.setText("Nenhum usuário disponível");
                 idadeLabel.setText("");
@@ -146,7 +144,6 @@ public class TelaProcurarMatch extends JFrame {
         add(mainPanel);
         setLocationRelativeTo(null);
 
-        // Carregar primeiro usuário
         proximoUsuario.actionPerformed(null);
     }
 

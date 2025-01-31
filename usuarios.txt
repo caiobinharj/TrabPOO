@@ -1,16 +1,13 @@
+serginho;serginho;21; ;brasilia;rock n roll;false;false;pansexual;null;basquete;false;true;D;true;gosto de cachoeira e natureza;0;false
 marco;marco;22; ;rio de janeiro;rock;true;true;Hétero;null;Futebol;true;true;N;true;gosto de sair;0;false
 julia;julia;20; ;sao paulo;pop;false;true;Lésbica;null;Dançar;true;false;D;true;gosto de festas;0;true
-lucas;lucas;25; ;belo horizonte;indie;true;false;Gay;null;Correr;true;true;N;true;gosto de animais;0;false
-maria;maria;28; ;recife;jazz;true;false;Hétero;null;Cozinhar;false;true;D;false;adoro música clássica;0;false
 pedro;pedro;30; ;curitiba;rock;false;true;Pansexual;null;Jogar videogame;true;true;D;true;gosto de tecnologia;0;false
 camila;camila;19; ;porto alegre;sertanejo;true;false;Hétero;null;Leitura;true;true;N;true;gosto de sair com amigos;0;false
 roberto;roberto;23; ;florianopolis;eletronica;true;true;Gay;null;Fotografia;false;true;D;true;gosto de festas;0;false
 larissa;larissa;24; ;salvador;rap;false;false;Hétero;null;Academia;true;true;N;true;gosto de esportes radicais;0;false
 andre;andre;26; ;manaus;reggae;true;true;Transexual;null;Viajar;false;true;D;true;gosto de praia;0;false
-ana;ana;21; ;fortaleza;mpb;false;true;Lésbica;null;Estudo;true;false;N;true;gosto de natureza;0;false
 joao;joao;29; ;sao paulo;pop;true;false;Hétero;null;Caminhada;true;true;D;true;gosto de comida japonesa;0;false
 mariana;mariana;22; ;belo horizonte;indie;false;true;Pansexual;null;Futebol;true;false;N;true;gosto de arte;0;false
-gustavo;gustavo;27; ;recife;rock;true;true;Gay;null;Jogar tênis;true;true;D;false;gosto de futebol;0;false
 felipe;felipe;20; ;curitiba;jazz;false;true;Hétero;null;Correr;true;false;D;true;gosto de ler;0;false
 aline;aline;24; ;porto alegre;eletronica;true;false;Lésbica;null;Viajar;true;true;N;true;gosto de fotografia;0;false
 ricardo;ricardo;31; ;florianopolis;rap;true;true;Pansexual;null;Jogar videogame;true;true;D;true;gosto de cinema;0;false
@@ -22,8 +19,5 @@ gabriela;gabriela;25; ;rio de janeiro;jazz;true;true;Pansexual;null;Futebol;fals
 matheus;matheus;27; ;sao paulo;pop;true;false;Hétero;null;Academia;true;true;D;true;gosto de esporte;0;false
 diana;diana;26; ;curitiba;eletronica;true;false;Transexual;null;Leitura;false;true;N;true;gosto de música;0;false
 fernando;fernando;29; ;florianopolis;rock;true;false;Gay;null;Cozinhar;true;true;D;false;gosto de viajar pelo mundo;0;false
-beatriz;beatriz;24; ;salvador;indie;false;true;Lésbica;null;Academia;true;true;N;true;gosto de moda;0;false
 henrique;henrique;23; ;recife;jazz;true;true;Pansexual;null;Viajar;true;false;D;true;gosto de acampamentos;0;false
-lucas;lucas;25; ;belo horizonte;indie;true;false;Gay;null;Correr;true;true;N;true;gosto de animais;0;false
 lara;lara;22; ;salvador;rap;false;true;Lésbica;null;Fotografia;true;true;N;true;gosto de festa;0;false
-
